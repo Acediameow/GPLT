@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn = 1005;
+int sex[maxn] = {0};
+double relateA[maxn] = {0};
+double relateB[maxn] = {0};
+vector<int> v[maxn];
+int A, B;
+
+void print(int a, int b){
+    if(sex[a]) 
+        cout << "-";
+    cout << a << " ";
+    if(sex[b])
+        cout << "-";
+    cout << b << endl;
+}
+
+int main()
+{
+    int n, m, k;
+    cin >> n >> m;
+    char s[10];
+    for(int i = 0; i < m; ++ i)
+    {
+        cin >> k;
+        for(int j = 0; j < k; j ++)
+        {
+            cin >> s;
+            int t = abs(atoi(s));
+            if(s[0] == '-')
+                sex[t] = 1;
+            v[i].push_back(t);
+        }
+    }
+    cin >> s;
+    A = abs(atoi(s));
+    if(s[0] == '-') sex[A] = 1;
+    cin >> s;
+    B = abs(atoi(s));
+    if(s[0] == '-') sex[B] = 1;
+    double maxA = 0,maxB = 0;
+    for(int i=0;i<m;i++)
+    {
+        bool founda = find(v[i].begin(),v[i].end(),A) != v[i].end();
+        bool foundb = find(v[i].begin(),v[i].end(),B) != v[i].end();
+        if(founda || foundb)
+        { 
+            for(int j = 0; j < v[i].size(); j++){
+                int c = v[i][j];
+                if(founda && sex[A] != sex[c]){
+                    relateA[c] += (double)1 / v[i].size();
+                    maxA = max(maxA,relateA[c]);
+                }
+                if(foundb && sex[B] != sex[c]){
+                    relateB[c] += (double)1 / v[i].size();
+                    maxB = max(maxB,relateB[c]);
+                }
+            }
+        }
+    }
+    if(relateA[B] == maxA &&relateB[A] == maxB) 
+    {
+        print(A,B);
+    }
+    else
+    {
+        for(int i=0; i<n; i++)
+        {
+            if(maxA == relateA[i]) 
+                print(A,i); 
+        }
+        for(int i = 0; i < n; ++ i)
+        {
+            if(maxB == relateB[i]) 
+                print(B,i); 
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn = 1e6 + 5;
+int level[maxn];
+int ans;
+vector<int> q[maxn];
+void dfs(int x, int step)
+{
+    ans = max(ans, step);
+    for(int i = 0; i < q[x].size(); ++ i)
+    {
+        level[q[x][i]] = step + 1;
+        dfs(q[x][i], step + 1);
+    }
+    return;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    int flag = -1;
+    for(int i = 1; i < n + 1; ++i)
+    {
+        int t;
+        cin >> t;
+        if(t == -1)
+        {
+            flag = i;
+            level[i] = 1;
+            continue;
+        }
+        q[t].push_back(i);
+    }
+    dfs(flag, 1);
+    cout << ans << endl;
+    int xx = 0;
+    for(int i = 1; i <n + 1; ++i)
+    {
+        if(level[i] == ans)
+        {
+            if(xx == 0)
+                cout << i, xx = 1;
+            else
+                cout << " " << i;
+        }
+    }
+    cout << endl;
+    return 0;
+}

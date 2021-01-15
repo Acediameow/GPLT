@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn = 1e5 + 5;
+int mp[maxn]; 
+int vis[maxn];
+vector<int> p[maxn];
+
+void dfs(int x,int step)
+{
+    mp[x] = step;
+    for(int i = 0; i < p[x].size(); ++ i)
+    {
+        dfs(p[x][i], step + 1);
+    }
+}
+int main()
+{
+    int n;
+    cin >> n;
+    memset(vis, 0, sizeof vis);
+    for(int i = 1; i <= n; ++ i)
+    {
+        int m;
+        cin >> m;
+        while(m --)
+        {
+            int a;
+            cin >> a;
+            vis[a] = 1;
+            p[i].push_back(a); 
+        }
+    }
+    int root;
+    for(int i = 1; i <= n; ++ i)
+    {
+        if(vis[i] == 0)
+        {
+            root = i;
+        }
+    }
+    dfs(root, 0);
+    int sum = -1;
+    int num = 0;
+    for(int i = 1; i <= n; ++i)
+    {
+        if(mp[i] > sum)
+        {
+            sum = mp[i];
+            num = i;
+        }
+    }
+    cout << num << endl;
+    return 0;
+}
