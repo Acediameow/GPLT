@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector <int>po;
+int pre[1005];
+bool ismirror=false;
+
+void getpost(int l,int r)
+{
+    if(l > r) 
+        return ;
+    int i = l + 1;
+    int j = r;
+    if(!ismirror)
+    {
+        while(i <= r && pre[l] > pre[i]) 
+            ++ i;
+        while(j > l && pre[l] <= pre[j]) 
+            -- j;
+    }
+    else
+    {
+        while(i<=r&&pre[l]<=pre[i]) 
+            ++ i;
+        while(j>l&&pre[l]>pre[j]) 
+             -- j;
+    }
+    if(i - j != 1) 
+        return;
+    getpost(l + 1, j);
+    getpost(i, r); 
+    po.push_back(pre[l]);
+}
+int main()
+{
+    int n; 
+    cin >> n;
+    for(int i = 0; i < n; ++ i) 
+        cin >> pre[i];
+    po.clear();
+    getpost(0, n - 1);
+    if(po.size() != n)
+    {
+        ismirror = true;
+        po.clear();
+        getpost(0, n - 1);
+    }
+    if(po.size() != n) 
+        cout << "NO" << endl;
+    else
+    {
+        cout << "YES" << endl;
+        for(int i = 0; i < n; ++ i)
+            if(i != n - 1)
+                cout << po[i] <<" ";
+            else
+                cout << po[i] << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+    ll n ,sum = 0;
+    cin>>n;
+    ll a[100010] = {0};
+    for(int i = 0 ; i < n ;i++)
+    {
+        cin>>a[i];
+        sum += a[i];  //总分
+    }
+    ll sum1 = 0,sum2 = 0;
+    sort(a , a + n);
+    for(int i = 0 ; i < n/2 ; i++)
+    {
+        sum1 += a[i];  //前半部分的人的分；
+    }
+    sum2 = sum - sum1;  //后半部分的分
+    ll num1  = n / 2;
+    ll num2  = n - num1;
+    ll cha = abs(sum1 - sum2);
+    printf("Outgoing #: %lld\n",num2);
+    printf("Introverted #: %lld\n",num1);
+    printf("Diff = %lld\n",cha);
+    return 0;
+}

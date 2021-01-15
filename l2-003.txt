@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node
+{
+    double weight;
+    double value;
+    double avg = value / weight;
+}node[1005];
+
+bool cmp(Node a, Node b)
+{
+    return a.avg > b.avg;
+}
+
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    for(int i = 0; i < n; ++i)
+        cin >> node[i].weight;
+    for(int i = 0; i < n; ++i)
+    {
+        cin >> node[i].value;
+        node[i].avg = node[i].value / node[i].weight;
+    }
+    sort(node, node + n, cmp);
+    double sum = 0;
+    for(int i = 0; i < n; ++i)
+    {
+        if(m >= node[i].weight)
+        {
+            m -= node[i].weight;
+            sum += node[i].value;
+        }
+        else
+        {
+            sum += node[i].avg * m;
+            m = 0;
+            break;
+        }
+    }
+    printf("%.2lf\n", sum);
+    return 0;
+}

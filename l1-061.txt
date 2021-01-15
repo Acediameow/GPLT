@@ -1,0 +1,14 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    double h, w;
+    cin >> w >> h;
+    double s = w / (h * h);
+    printf("%.1lf\n", s);
+    if(s > 25)
+        cout << "PANG" << endl;
+    else
+        cout << "Hai Xing" << endl;
+    return 0;
+}

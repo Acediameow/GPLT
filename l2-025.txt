@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+int a[10005], b[10005];
+int point[10005];
+int main()
+{
+    int i, j, city, road, n, m, t, flag;
+    cin >> city >> road;
+    for (i = 1; i <= road; i ++)
+    {
+        cin >> a[i] >> b[i];
+    }
+    cin >> n;
+    for (i = 0; i < n; i ++)
+    {
+        cin>>m;
+        memset(point, 1, sizeof(point));
+        for (j = 1; j <= m; j ++)
+        {
+            cin >> t;
+            point[t] = 0;
+        }
+        flag = 0;
+        for (j = 1; j <= road; j ++)
+        {
+            if (point[a[j]] && point[b[j]]) // 如果两个点有连通
+            {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag  != 0)
+            cout<<"NO"<<endl;
+        else
+            cout<<"YES"<<endl;
+    }
+    return 0;
+}

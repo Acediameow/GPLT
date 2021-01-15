@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{
+    string name; 
+    int k;  //总数
+    int num;  //不同标签的个数 
+}node[1005];
+
+bool cmp(Node a, Node b)
+{
+    if(a.num != b.num)
+        return a.num > b.num;
+    else
+        return a.k < b.k;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    set <int> s;
+    for(int i = 0; i < n; ++i)
+    {
+        cin >> node[i].name >> node[i].k;
+        for(int j = 0; j < node[i].k; ++ j)
+        {
+            int a;
+            cin >> a;
+            s.insert(a);
+        }
+        node[i].num = s.size();
+        s.clear();
+    }
+    sort(node, node + n, cmp);
+    if(n >= 3)
+    {
+        for(int i = 0; i < 3; ++ i)
+        {
+            if(i != 2)
+                cout << node[i].name << " ";
+            else
+                cout << node[i].name << endl;
+        }
+    }
+    if(n == 1)
+    {
+        cout << node[0].name << " ";
+        cout << "- -" << endl;
+    }
+    if(n == 2)
+    {
+        cout << node[0].name << " " << node[1].name << " - -" << endl;
+    }
+    return 0;
+}

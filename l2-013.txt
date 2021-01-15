@@ -1,0 +1,85 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n, m, k;
+int fa[505];
+int vis[1000];
+
+struct Node
+{
+    int x;
+    int y;
+}node[5005];
+
+int find(int x)
+{
+    if(fa[x] == x) 
+        return x;
+    else
+        return fa[x] = find(fa[x]);
+}
+void uunion(int x, int y)
+{
+    int a = find(x);
+    int b = find(y);
+    if(a == b) 
+        return;
+    fa[a] = b;
+}
+ 
+void init()
+{
+    for(int i = 0; i < n; ++i)
+    {
+        fa[i] = i;
+    }
+}
+
+int main()
+{
+    cin >> n >> m;
+    init();
+    for(int i = 0; i < m; ++ i)
+    {
+        cin >> node[i].x >> node[i].y;
+        uunion(node[i].x, node[i].y);
+    }
+    int num = 0;
+    for(int i  = 0; i < n; ++i)
+    {
+        if(fa[i] == i)
+            num ++;
+    }
+    cin >> k;
+    int cnt = k;
+    while(k--)
+    {
+        int x;
+        cin >> x;
+        vis[x] = 1;
+        int num1 = 0;
+        init();
+        for(int i = 0; i < m; ++ i)
+        {
+            if(vis[node[i].x] == 1 || vis[node[i].y] == 1)
+                continue;
+            uunion(node[i].x, node[i].y);
+        }
+        for(int i = 0; i < n; ++ i)
+        {
+            if(fa[i] == i)
+            {
+                num1 ++;
+            }
+        }
+        if(num1 == num || num1 == num+1)
+            printf("City %d is lost.\n",x);
+        else
+            printf("Red Alert: City %d is lost!\n",x);
+        num = num1;
+    }
+    if(cnt == n)
+    {
+        printf("Game Over.\n");
+    }
+    return 0;
+}

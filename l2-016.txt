@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn = 1e6 + 5;
+bool flag = false;
+struct Node
+{
+    char sex;
+    int father;
+    int mother;
+}node[maxn];
+
+void init(int n)
+{
+    for(int i = 0; i < maxn; ++i)
+    {
+        node[i].mother = node[i].father = -1;
+    }
+}
+
+void dfs(int father, int mother, int step)
+{
+    if(father == -1 || mother == -1)
+        return ;
+    if(step >= 5)
+        return ;
+    if(father == mother)
+       flag = true;
+    dfs(node[father].mother, node[mother].mother, step + 1);
+    dfs(node[father].father, node[mother].father, step + 1);
+    dfs(node[father].father, node[mother].mother, step + 1);
+    dfs(node[father].mother, node[mother].father, step + 1);
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    init(n);
+    for(int i = 0; i < n; ++i)
+    {
+        int id;
+        cin >> id;
+        cin >> node[id].sex >> node[id].father >> node[id].mother;
+        if(node[id].father != -1)
+            node[node[id].father].sex = 'M';
+        if(node[id].mother != -1)
+            node[node[id].mother].sex = 'F';
+    }
+    int k;
+    cin >> k;
+    for(int i = 0; i < k; ++ i)
+    {
+        flag = false;
+        int a, b;
+        cin >> a >> b;
+        if(node[a].sex == node[b].sex)
+            cout << "Never Mind" << endl;
+        else
+        {
+            dfs(a, b, 0);
+            if(flag == false)
+                cout << "Yes" << endl;
+            else
+                cout << "No" << endl;
+        }
+    }
+    return 0;
+}

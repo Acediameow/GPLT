@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn = 1e6 + 5;
+vector<int> mp[maxn];
+int vis[maxn];
+double ans;
+
+void dfs(double z, int step, double r)
+{
+    vis[step] = 1;
+    for(int i = 0; i < mp[step].size(); ++ i)
+    {
+        if(mp[step][0] == 0)
+        {
+            ans += mp[step][1] * z;
+            return ;
+        }
+        if(!vis[mp[step][i]])
+        {
+            dfs(z - (z * r / 100), mp[step][i], r);
+        }
+    }
+}
+
+int main()
+{
+    int n;
+    double z, r;
+    cin >> n >> z >> r;
+    for(int i = 0; i < n; ++ i)
+    {
+        int k;
+        cin >> k;
+        if(k == 0)
+        {
+            int beilv;
+            mp[i].push_back(0);
+            cin >> beilv;
+            mp[i].push_back(beilv);
+        }
+        else
+        {
+            for(int j = 0; j < k; ++ j)
+            {
+                int x;
+                cin >> x;
+                mp[i].push_back(x);
+            }
+        }
+    }
+    dfs(z, 0, r);
+    cout << int(ans) << endl;
+    return 0;
+}
