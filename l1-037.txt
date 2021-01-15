@@ -1,0 +1,12 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int a,b;
+    scanf("%d %d",&a,&b);
+    double sum = a * 1.0/ b;
+    if (b == 0) printf("%d/0=Error\n",a);
+    else if(b  < 0) printf("%d/(%d)=%.2lf\n",a,b,sum);
+    else printf("%d/%d=%.2lf\n",a,b,sum);
+    return 0;
+}

@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int k,cnt=0;
+    string s;
+    cin>>k;
+    cin>>s;
+    while(s != "End")
+    {
+        cnt ++;
+        if(cnt % (k + 1) != 0)
+        {
+            if(s == "ChuiZi")
+                cout << "Bu";
+            else if(s == "JianDao")
+                cout << "ChuiZi";
+            else if(s == "Bu")
+                cout << "JianDao";
+        }
+        else
+        {
+            cnt=0;
+            cout<<s;
+        }
+        cout<<endl;
+        cin>>s;
+    }
+    return 0;
+}

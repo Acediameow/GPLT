@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n,i,c = 0,k = 0,f = 0,l,sum;
+    char s[5],y;
+    while(scanf("%d",&n)!=EOF)
+    {
+        c++;
+        if(n==250&&f==0)
+        {
+            k=c;
+            f=1;
+        }
+        if((y=getchar())=='\n')break;
+    }
+    printf("%d\n",k);
+}

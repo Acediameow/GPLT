@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node
+{
+    int key1;
+    int key2;
+    int time1;
+    int time2;
+    int time;
+    int sum ;
+}node[1005];
+
+int main()
+{
+    int n;
+    cin >> n;
+    int k = n;
+    while(k != 0)
+    {
+        int no;
+        int flag = 0;
+        while(cin >> no)
+        {
+            if(no == 0)
+            {
+                int ttime = 0;
+                int nnum = 0 ;
+                for(int i = 0; i < 1005; ++i)
+                {
+                    nnum += node[i].sum;
+                    ttime += node[i].time;
+                }
+                k --;
+                if(nnum == 0)
+                    cout << "0 0" << endl;
+                if(nnum != 0)
+                {
+                    cout << nnum << " " ;
+                    printf("%.0lf\n", (double)(ttime * 1.0 + 0.5) / nnum);
+                }
+                memset(node, 0, sizeof node);
+            }
+            char key;
+            int h, t;
+            cin >> key;
+            scanf("%d:%d", &h, &t);
+            if(key == 'S')
+            {
+                node[no].key1 = 1;
+                node[no].time1 = h * 60 + t;
+            }
+            if(key == 'E')
+            {
+                node[no].key2 = 1;
+                node[no].time2 = h * 60 + t;
+            }
+            if(node[no].key1 == 1 && node[no].key2 == 1)
+            {
+                node[no].key1 = 0;
+                node[no].key2 = 0;
+                node[no].time += node[no].time2 - node[no].time1;
+                node[no].time2 = 0;
+                node[no].time1 = 0;
+                node[no].sum ++;
+            }
+        }
+    }
+    return 0;
+}

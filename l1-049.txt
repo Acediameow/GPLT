@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    int mp[105][105][105];
+    int s[105];
+    int maxx = 0, pre = -1;
+    cin >> n;
+    for(int i = 0; i < n; ++i)
+    {
+        cin >> s[i];
+        if(maxx < s[i])
+            maxx = s[i];
+    }
+    int flag = 0;
+    for(int i = 0; i < maxx; ++i)  //最大的队伍数量
+    {
+        for(int j = 0; j < 10; ++j)  //队员数量
+        {
+            for(int k = 0; k < n; ++k)  //遍历学校
+            {
+                if(i < s[k])
+                {
+                    if(pre == k) //如果只剩了一个学校 直接相邻
+                        flag ++;
+                    flag ++;
+                    mp[k][i][j] = flag;
+                    pre = k;
+                }
+            }
+        }
+    }
+    for(int i = 0; i < n; ++i)
+    {
+        cout << "#" <<i + 1 << endl;
+        for(int j = 0; j < s[i]; ++j)
+        {
+            for(int k = 0; k < 10; ++k)
+            {
+                if(k == 9)
+                    cout << mp[i][j][k];
+                else
+                    cout << mp[i][j][k] <<" ";
+            }
+            cout << endl;
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int a[105][105],b[105][105];
+    int m,n,x,y,sum;
+    scanf("%d %d", &m , &n);  //输入两个矩阵
+    for(int i = 0; i < m; i++)
+    {
+        for(int j = 0 ; j < n ; j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+    scanf("%d %d",&x,&y);
+    for(int i = 0; i < x; i++)
+    {
+        for(int j = 0; j < y ; j++)
+        {
+            scanf("%d",&b[i][j]);
+        }
+    }
+    //判断是否匹配
+    if(x != n)
+    {
+        printf("Error: %d != %d\n", n ,x);
+    }
+    else
+    {
+        printf("%d %d\n", m , y);//计算  && 我数学是真的不好能不能不要让我现学啊哭了
+        for(int i = 0; i < m; i++)
+        {
+            for(int j = 0 ; j < y ; j++)
+            {
+                sum = 0;
+                for(int k = 0 ; k < n; k++)
+                {
+                    sum += a[i][k] * b[k][j];
+                }
+                if (j >= y - 1)   
+                    printf("%d\n",sum);
+                else
+                    printf("%d ",sum);
+            }
+        }
+    }
+    return 0;
+}
+

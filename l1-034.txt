@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+int book[1005] = {0};
+int main()
+{
+    int n;
+    cin >> n;
+    int count = 0;  
+    int ans = 0;
+    for(int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        for(int j = 0; j < x; j++) {
+            int data;
+            cin >> data;
+            book[data]++;
+            if(book[data] > count) {
+                count = book[data];
+                ans = data;
+            } else if(book[data] == count && data > ans) {  //并列的情况
+                count = book[data];
+                ans = data;
+            }
+        }
+    }
+    cout << ans << " " << count;
+    return 0;
+}
+
