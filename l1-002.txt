@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    char x;
+    cin >> n >> x;
+    getchar();
+    int k = 1;
+    int sum = n + 1;
+    int t = 0;
+    while(sum - 2 * k >= 0)
+    {
+        sum -= 2 * k;
+        k += 2;
+        t ++ ;
+    }
+    for(int i = t; i > 0; --i)
+    {
+        for(int j = 0; j < t - i; ++ j)
+        {
+            printf(" ");
+        }
+        for(int j = 0; j < i * 2 - 1; ++ j)
+        {
+            printf("%c", x);
+        }
+        printf("\n");
+    }
+    for(int i = 2; i < t + 1; ++i)
+    {
+        for(int j = 0; j < t - i; ++ j)
+        {
+            printf(" ");
+        }
+        for(int j = 0; j < i * 2 - 1; ++ j)
+        {
+            printf("%c", x);
+        }
+        printf("\n");
+    }
+    cout << sum << endl;
+    return 0;
+}
