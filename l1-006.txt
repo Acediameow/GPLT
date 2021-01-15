@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int n,sum = 0;
+    scanf("%lld",&n);
+    int start = 0,len = 0;
+    for(int i = 2;i <= sqrt(n);i++)
+    {
+        sum = 1;
+        for(int j = i ;sum * j <= n;j++)
+        {
+            sum *= j;
+            if(n % sum == 0 && j - i + 1 > len)
+            {
+                start=i;
+                len=j-i+1;
+            }
+        }
+    }
+    if(start == 0)
+    {
+        start=n;
+        len=1;
+    }
+    printf("%d\n%d",len,start);
+    for(int i = start + 1;i < start + len; ++ i)
+        printf("*%d", i);
+    return 0;
+}

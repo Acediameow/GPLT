@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int weight[17] = {7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2};
+    char t[11] = {'1', '0' ,'X', '9', '8', '7','6', '5', '4', '3','2'};
+    int n;
+    cin >> n;
+    getchar();
+    string s;
+    int num = 0;
+    for(int i = 0; i < n; ++i)
+    {
+        getline(cin, s);
+        bool flag = true;
+        int sum = 0;
+        if(s.size() != 18)
+            flag = false;
+        for(int j = 0; j < 17; ++j)
+        {
+            if(s[j] >= '0' && s[j] <= '9')
+            {
+                sum += weight[j] * (s[j] - '0');
+            }
+            else
+            {
+                flag = false;
+                break;
+            }
+        }
+        if(flag == false || t[sum % 11] != s[17])
+            cout << s << endl;
+        if(flag == true && t[sum % 11] == s[17])
+            num ++;
+    }
+    if(num == n)
+        cout << "All passed" << endl;
+    return 0;
+}

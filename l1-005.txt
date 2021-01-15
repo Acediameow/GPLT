@@ -1,0 +1,33 @@
+#include<stdio.h>
+typedef struct LIST{
+    long long nums1;
+    int  nums2;
+    int nums3;
+}MYLIST;
+
+int main()
+{
+    MYLIST a[1005];
+    int n1, n2, i, j, b[1005];
+    scanf("%d",&n1);
+    for(i = 0; i < n1; ++ i)
+    {
+        scanf("%lld %d %d",&a[i].nums1,&a[i].nums2,&a[i].nums3);
+    }
+    scanf("%d",&n2);
+    for(i = 0; i < n2; ++ i)
+    {
+        scanf("%d",&b[i]);
+    }
+    for(i = 0;i < n2; ++ i)
+    {
+        for(j = 0; j < n1; ++ j)
+        {
+            if(b[i] == a[j].nums2)
+            {
+                printf("%lld %d\n",a[j].nums1,a[j].nums3);
+            }
+        }
+    }
+    return 0;
+}

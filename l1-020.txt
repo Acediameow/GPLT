@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+const int maxn = 1e6 + 5;
+using namespace std;
+int main()
+{
+    int n;
+    int s[maxn] = {0};
+    cin >> n;
+    for(int i = 0; i < n; ++i)
+    {
+        int a, no;
+        cin >> a;
+        for(int j = 0; j < a; ++j)
+        {
+            cin >> no;
+            if(a == 1) s[no] -= 1;
+            s[no] ++;
+        }
+    }
+    int m, b;
+    cin >> m;
+    queue<int> l;
+    for(int i = 0; i < m; ++ i)
+    {
+        cin >> b;
+        if(s[b] == 0)
+        {
+            l.push(b); 
+            s[b] ++;
+        }
+    }
+    if(!l.empty())
+    {
+        int len = l.size();
+        for(int i = 0; i < len - 1; ++i)
+        {
+            printf("%05d ", l.front());
+            l.pop();
+        }
+        printf("%05d\n", l.front());
+    }
+    else
+        cout << "No one is handsome" << endl;
+    return 0;
+}

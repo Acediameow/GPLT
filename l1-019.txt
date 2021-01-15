@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int a[105][2];
+int b[105][2];
+int main()
+{
+    int numa, numb, da = 0, db = 0;
+    cin >> numa >> numb;
+    int n, a, aa, b, bb;
+    cin >> n;
+    for(int i = 0; i < n; ++i)
+    {
+        bool flaga = true;
+        bool flagb = true;
+        cin >> a >> aa >> b >> bb;
+        if(a + b == aa)
+            flaga = false;
+        if(a + b == bb)
+            flagb = false;
+        if(flaga && !flagb)
+            numb -- , db ++;
+        if(!flaga && flagb)
+            numa --, da ++;
+        if(numa < 0 || numb < 0)
+            break;
+    }
+    if(numa < 0)
+        cout << 'A'<<endl, cout << db << endl;
+    else
+        cout <<'B'<<endl, cout << da << endl;
+    return 0;
+}

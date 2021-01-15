@@ -1,0 +1,32 @@
+#include<stdio.h>
+int main()
+{
+    int a[4] = {0};
+    char s[10005];
+    gets(s);
+    int ll = strlen(s);
+    for(int i = 0; i < ll; ++i)
+    {
+        if(s[i] == 'g' || s[i] == 'G')
+            a[0] ++;
+        if(s[i] == 'p' || s[i] == 'P')
+            a[1] ++;
+        if(s[i] == 'l' || s[i] == 'L')
+            a[2] ++;
+        if(s[i] == 't' || s[i] == 'T')
+            a[3] ++;
+    }
+    char ss[4] = {'G', 'P', 'L', 'T'};
+    while( a[0] != 0 || a[1] != 0 || a[2] != 0 || a[3] != 0)
+    {
+        if(a[0] != 0)
+            printf("G"), a[0] --;
+        if(a[1] != 0)
+            printf("P"), a[1] --;
+        if(a[2] != 0)
+            printf("L"), a[2] --;
+        if(a[3] != 0)
+            printf("T"), a[3] --;
+    }
+    return 0;
+}

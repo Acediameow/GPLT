@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+    string str;
+    vector<int> vec;
+    set<int> st;
+    cin >> str;
+    for(int i = 0; i <str.size(); ++i) {
+        if(st.count(str[i] - '0') == 0) {
+            vec.push_back(str[i] - '0');
+            st.insert(str[i] - '0');
+        }
+    }
+    sort(vec.begin(), vec.end(), greater<int>());
+    cout << "int[] arr = new int[]{";
+    for(int i = 0; i < vec.size() - 1; ++i) cout << vec[i] << ',';
+    cout << vec[vec.size() - 1] << "};" << endl;
+    cout << "int[] index = new int[]{";
+    for(int i = 0; i < str.size() - 1; ++i) {
+        cout << lower_bound(vec.begin(), vec.end(), str[i] - '0', greater<int>()) - vec.begin() << ',';
+    }
+    cout << lower_bound(vec.begin(), vec.end(), str[str.size() - 1] - '0', greater<int>()) - vec.begin() << "};" << endl;
+    return 0;
+}

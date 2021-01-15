@@ -1,0 +1,12 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int d;
+    cin >> d;
+    if(d == 5)
+        cout << 7 << endl;
+    else
+        cout << (d + 2) % 7 << endl;
+    return 0;
+}

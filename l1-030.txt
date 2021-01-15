@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int sex[55],book[55] = {0};
+    char name[55][55];
+    for(int i = 0; i < n; i++)
+    {
+        scanf("%d %s",&sex[i],name[i]);
+    }
+    for(int i = 0; i < n ; i++)
+    {
+        for(int j = n - 1; j >= 0; j--)
+        {
+            if(book[j] == 0 && book[i] == 0 && sex[i] != sex[j])
+            {
+                printf("%s %s\n",name[i],name[j]);
+                book[i] = 1;
+                book[j] = 1;
+            }
+        }
+    }
+    return 0;
+}
